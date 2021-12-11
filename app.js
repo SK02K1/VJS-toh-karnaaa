@@ -24,11 +24,15 @@ const changeTaskState = (task) => {
     task.classList.toggle("completed");
 };
 
+const deleteTask = (task) => {
+    task.remove();
+};
+
 taskContainer.addEventListener("click", (e) => {
    const target  = e.target;
    if(target.classList.contains("btn-check")){
        changeTaskState(target.parentElement.previousElementSibling);
    }else if(target.classList.contains("btn-delete")){
-       console.log("delete");
+       deleteTask(target.parentElement.parentElement);
    }
 });
