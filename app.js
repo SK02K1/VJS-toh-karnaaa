@@ -19,3 +19,16 @@ formAddNewTask.addEventListener("submit", (e) => {
     formAddNewTask.reset();
     addNewTask(task);
 });
+
+const changeTaskState = (task) => {
+    task.classList.toggle("completed");
+};
+
+taskContainer.addEventListener("click", (e) => {
+   const target  = e.target;
+   if(target.classList.contains("btn-check")){
+       changeTaskState(target.parentElement.previousElementSibling);
+   }else if(target.classList.contains("btn-delete")){
+       console.log("delete");
+   }
+});
