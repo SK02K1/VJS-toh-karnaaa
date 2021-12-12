@@ -1,0 +1,24 @@
+body {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.task-card {
+    width: 50%;
+    margin: .5rem auto;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid  black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control {
+    margin: 0rem .5rem;
+    cursor: pointer;
+}
+
+.completed {
+    text-decoration: line-through;
+}
