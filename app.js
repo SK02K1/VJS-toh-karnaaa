@@ -60,10 +60,8 @@ taskContainer.addEventListener("click", (e) => {
    const id = target.parentElement.parentElement.getAttribute("data-id");
    console.log(target.nextElementSibling, id)
    if(target.classList.contains("btn-check")){
-    //    need change
        changeTaskState(target.nextElementSibling, id);
    }else if(target.classList.contains("btn-delete")){
-    // need change
        deleteTask(target.parentElement.parentElement, id);
    }
 });
