@@ -1,6 +1,8 @@
 const formAddNewTask = document.querySelector("#form-add-new-task");
 const taskContainer = document.querySelector(".task-container");
+const dateContainer = document.querySelector(".date");
 
+dateContainer.textContent = `${dateFns.format(new Date(), "MMMM D, YYYY")}`;
 class Task {
     constructor(task){
         this.task = task;
@@ -17,11 +19,13 @@ const updateLocalStorage = (newTaskData) => {
 const addNewTask = (newTaskData, id) => {
     taskContainer.innerHTML += `
         <div class="task-card" data-id="${id}">
-        <span class="task ${newTaskData.isCompelted ? "completed" : ""}">${newTaskData.task}</span>
-        <div class="controls-container" >
-            <i class="fas fa-check-square btn-check control"></i>
-            <i class="fas fa-trash btn-delete control"></i>
-        </div>
+            <label class="task">
+                <input class="btn-check" type="checkbox" ${newTaskData.isCompelted && "checked"}>
+                <span class="task ${newTaskData.isCompelted ? "completed" : ""}">${newTaskData.task}</span>
+            </label>
+            <div class="controls-container" >
+                <i class="fas fa-trash btn-delete control"></i>
+            </div>
         </div>
     `;
 };
@@ -54,8 +58,9 @@ const deleteTask = (task, id) => {
 taskContainer.addEventListener("click", (e) => {
    const target  = e.target;
    const id = target.parentElement.parentElement.getAttribute("data-id");
+   console.log(target.nextElementSibling, id)
    if(target.classList.contains("btn-check")){
-       changeTaskState(target.parentElement.previousElementSibling, id);
+       changeTaskState(target.nextElementSibling, id);
    }else if(target.classList.contains("btn-delete")){
        deleteTask(target.parentElement.parentElement, id);
    }
