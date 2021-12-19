@@ -1,4 +1,5 @@
 const formAddNewTask = document.querySelector("#form-add-new-task");
+const formSearchTask = document.querySelector("#form-search-task");
 const taskContainer = document.querySelector(".task-container");
 const dateContainer = document.querySelector(".date");
 
@@ -19,7 +20,7 @@ const updateLocalStorage = (newTaskData) => {
 const addNewTask = (newTaskData, id) => {
     taskContainer.innerHTML += `
         <div class="task-card" data-id="${id}">
-            <label class="task">
+            <label>
                 <input class="btn-check" type="checkbox" ${newTaskData.isCompelted && "checked"}>
                 <span class="task ${newTaskData.isCompelted ? "completed" : ""}">${newTaskData.task}</span>
             </label>
@@ -74,3 +75,15 @@ if(localStorage.tasks === undefined){
         addNewTask(task, i);
     });
 }
+
+
+formSearchTask.search.addEventListener("keyup", (e) => {
+    const query = e.target.value.trim().toLowerCase();
+    Array.from(taskContainer.children).forEach((taskCard) => {
+        if(taskCard.children[0].children[1].textContent.toLowerCase().includes(query)){
+            taskCard.classList.remove("hide");
+        }else{
+            taskCard.classList.add("hide");
+        }
+    });
+});
