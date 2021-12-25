@@ -70,17 +70,14 @@ const changeTaskState = (task, id) => {
   task.classList.toggle('completed');
 };
 
-const deleteTask = (task, id) => {
-  const tasks = JSON.parse(localStorage.getItem('tasks'));
-  tasks.splice(id, 1);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+const deleteTask = (task, uid) => {
+  updateStorage(tasksInStorage().filter(({ id }) => id !== uid));
   task.remove();
 };
 
 taskContainer.addEventListener('click', (e) => {
   const target = e.target;
   const id = target.parentElement.parentElement.getAttribute('data-id');
-  console.log(target.nextElementSibling, id);
   if (target.classList.contains('btn-check')) {
     changeTaskState(target.nextElementSibling, id);
   } else if (target.classList.contains('btn-delete')) {
