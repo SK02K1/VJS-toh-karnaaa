@@ -63,11 +63,19 @@ formAddNewTask.addEventListener('submit', (e) => {
   formAddNewTask.reset();
 });
 
-const changeTaskState = (task, id) => {
-  const tasks = JSON.parse(localStorage.getItem('tasks'));
-  tasks[id].isCompelted = !tasks[id].isCompelted;
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-  task.classList.toggle('completed');
+const changeTaskState = (taskCard, uid) => {
+  updateStorage(
+    tasksInStorage().map((taskInfo) => {
+      if (taskInfo.id === uid) {
+        const { id, task, isCompelted } = taskInfo;
+        return { id, task, isCompelted: !isCompelted };
+      } else {
+        return taskInfo;
+      }
+    })
+  );
+
+  taskCard.classList.toggle('completed');
 };
 
 const deleteTask = (task, uid) => {
