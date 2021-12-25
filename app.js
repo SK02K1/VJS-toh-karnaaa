@@ -5,16 +5,6 @@ const dateContainer = document.querySelector('.date');
 
 dateContainer.textContent = `${dateFns.format(new Date(), 'MMMM D, YYYY')}`;
 
-const tasksInStorage = () => JSON.parse(localStorage.tasks);
-
-const updateStorage = (tasks) => {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-};
-
-const addToStorage = (newTask) => {
-  updateStorage([...tasksInStorage(), newTask]);
-};
-
 const uuidv4 = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     var r = (Math.random() * 16) | 0,
@@ -30,10 +20,14 @@ class Task {
   }
 }
 
-const updateLocalStorage = (newTaskData) => {
-  const prevTasks = JSON.parse(localStorage.getItem('tasks'));
-  prevTasks.push(newTaskData);
-  localStorage.setItem('tasks', JSON.stringify(prevTasks));
+const tasksInStorage = () => JSON.parse(localStorage.tasks);
+
+const updateStorage = (tasks) => {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+};
+
+const addToStorage = (newTask) => {
+  updateStorage([...tasksInStorage(), newTask]);
 };
 
 const addNewTask = ({ id, task, isCompelted }) => {
