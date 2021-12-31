@@ -12,6 +12,9 @@ const uuidv4 = () => {
     return v.toString(16);
   });
 };
+
+const getTasks = () => JSON.parse(localStorage.tasks);
+
 class Task {
   constructor(task) {
     this.id = uuidv4();
@@ -20,22 +23,14 @@ class Task {
   }
 }
 
-const tasksInStorage = () => JSON.parse(localStorage.tasks);
-
-const updateStorage = (tasks) => {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-};
-
-const addToStorage = (newTask) => {
-  updateStorage([...tasksInStorage(), newTask]);
-};
-
-const addNewTask = ({ id, task, isCompelted }) => {
-  taskContainer.innerHTML += `
+const updateUI = () => {
+  taskContainer.innerHTML = getTasks()
+    .map(({ id, task, isCompelted }) => {
+      return `
         <div class="task-card" data-id="${id}">
             <label>
                 <input class="btn-check" type="checkbox" ${
-                  isCompelted && 'checked'
+                  isCompelted ? 'checked' : ''
                 }>
                 <span class="task ${
                   isCompelted ? 'completed' : ''
@@ -46,21 +41,27 @@ const addNewTask = ({ id, task, isCompelted }) => {
             </div>
         </div>
     `;
+    })
+    .join('');
 };
 
-formAddNewTask.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const task = formAddNewTask.task.value.trim();
-  const newTask = new Task(task);
-  addNewTask(newTask);
-  addToStorage(newTask);
-  formAddNewTask.reset();
-});
+const updateTasks = (updatedTasks) => {
+  localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  updateUI();
+};
 
-const changeTaskState = (taskCard, uid) => {
-  updateStorage(
-    tasksInStorage().map((taskInfo) => {
-      if (taskInfo.id === uid) {
+const addTask = (newTask) => {
+  updateTasks([...getTasks(), newTask]);
+};
+
+const deleteTask = (taskID) => {
+  updateTasks(getTasks().filter(({ id }) => id !== taskID));
+};
+
+const changeTaskState = (taskID) => {
+  updateTasks(
+    getTasks().map((taskInfo) => {
+      if (taskInfo.id === taskID) {
         const { id, task, isCompelted } = taskInfo;
         return { id, task, isCompelted: !isCompelted };
       } else {
@@ -68,29 +69,29 @@ const changeTaskState = (taskCard, uid) => {
       }
     })
   );
-
-  taskCard.classList.toggle('completed');
 };
 
-const deleteTask = (task, uid) => {
-  updateStorage(tasksInStorage().filter(({ id }) => id !== uid));
-  task.remove();
-};
+formAddNewTask.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const newTask = new Task(formAddNewTask.task.value.trim());
+  addTask(newTask);
+  formAddNewTask.reset();
+});
 
 taskContainer.addEventListener('click', (e) => {
   const target = e.target;
   const id = target.parentElement.parentElement.getAttribute('data-id');
   if (target.classList.contains('btn-check')) {
-    changeTaskState(target.nextElementSibling, id);
+    changeTaskState(id);
   } else if (target.classList.contains('btn-delete')) {
-    deleteTask(target.parentElement.parentElement, id);
+    deleteTask(id);
   }
 });
 
-if (localStorage.tasks === undefined) {
+if (!getTasks()) {
   localStorage.setItem('tasks', JSON.stringify([]));
 } else {
-  tasksInStorage().forEach((task) => addNewTask(task));
+  updateUI();
 }
 
 formSearchTask.search.addEventListener('keyup', (e) => {
