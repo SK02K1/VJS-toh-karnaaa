@@ -1,115 +1,113 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&display=swap');
 
 :root {
-    --inter: 'Inter', sans-serif;
-    --text-primary: #FAF7F7;
-    --text-secondary: #575767;
-    --bg: #141419;
-    --accent: #7E64FF;
+  --inter: 'Inter', sans-serif;
+  --text-primary: #faf7f7;
+  --text-secondary: #575767;
+  --bg: #141419;
+  --accent: #7e64ff;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: var(--inter);
-    font-weight: 400;
-    font-size: 16px;
+  font-family: var(--inter);
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .input-box {
-    border: none;
-    padding: .5rem .8rem;
-    border-radius: 5px;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 5px;
 }
 
 .btn {
-    border: none;
-    border-radius: 5px;
-    padding: .5rem .8rem;
-    font-size: 1rem;
-    cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .btn-primary {
-    background: var(--accent);
-    color: var(--text-primary);
+  background: var(--accent);
+  color: var(--text-primary);
 }
 
 .main-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    max-width: 50rem;
-    min-height: 100vh;
-    margin: 0 auto;
-    padding: 1rem;
-    text-align: center;
-    background: var(--bg);
-    color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 50rem;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  background: var(--bg);
+  color: var(--text-primary);
 }
 
 .navbar {
-    border: 1px solid var(--accent);
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .5rem;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
 }
 
 .date {
-    font-weight: bold;
-    font-size: 2rem;
+  font-weight: bold;
+  font-size: 2rem;
 }
 
 #form-add-new-task {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
 }
 
 #form-add-new-task input {
-    width: 90%;
+  width: 90%;
 }
 
 .task-container {
-    min-height: 70vmin;
-    max-height: 70vh;
-    overflow-y: scroll;
-    padding: .5rem;
+  min-height: 70vmin;
+  max-height: 70vh;
+  overflow-y: scroll;
+  padding: 0.5rem;
 }
 
 .task-card {
-    margin: .5rem auto;
-    padding: 1rem;
-    border-radius: 5px;
-    border: 1px solid  var(--text-secondary);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  margin: 0.5rem auto;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .task-card .task {
-    margin: 0 .5rem;
+  margin: 0 0.5rem;
 }
 
 .control {
-    margin: 0rem .5rem;
-    cursor: pointer;
+  margin: 0rem 0.5rem;
+  cursor: pointer;
 }
 
 .completed {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
-
-
