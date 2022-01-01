@@ -13,7 +13,7 @@ const uuidv4 = () => {
   });
 };
 
-const getTasks = () => JSON.parse(localStorage.tasks);
+const getTasks = () => JSON.parse(localStorage.getItem('tasks'));
 
 class Task {
   constructor(task) {
